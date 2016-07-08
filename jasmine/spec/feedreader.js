@@ -32,6 +32,16 @@ $(function() {
          * and that the URL is not empty.
          */
 
+        // for(var i = 0; i < allFeeds.length; i++){
+        //     console.log('feed:' + allFeeds[i].url + 'length: ' + allFeeds[i].url.length);
+        // };
+
+        it('URL is defined ', function() {
+            allFeeds.forEach(function(feed){
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toBe(0);
+            });
+        });
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
