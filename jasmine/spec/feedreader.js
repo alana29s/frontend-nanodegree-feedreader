@@ -81,6 +81,7 @@ $(function() {
           });
 
     });
+
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
         /* TODO: Write a test that ensures when the loadFeed
@@ -89,6 +90,21 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        beforeEach(function(done){
+            //load at least one feed
+            loadFeed(0, function() {
+                done();
+            });
+        });
+
+         it('loadFeed is defined', function() {
+            expect(loadFeed).toBeDefined();
+         });
+
+         it('single .entry element exists', function(done) {
+            expect(jQuery('.feed .entry').length).toBeGreaterThan(0);
+            done();
+         });
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
