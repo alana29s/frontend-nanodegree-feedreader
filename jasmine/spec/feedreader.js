@@ -64,7 +64,7 @@ $(function() {
          */
 
          it('Menu hidden by default', function() {
-            expect(jQuery('body').hasClass('menu-hidden')).toBe(true);
+            expect($('body').hasClass('menu-hidden')).toBe(true);
          });
 
          /* TODO: Write a test that ensures the menu changes
@@ -74,10 +74,10 @@ $(function() {
           */
           it('Menu visibility change on click', function() {
                 $('.menu-icon-link').click();
-                expect(jQuery('body').hasClass('menu-hidden')).toBe(false);
+                expect($('body').hasClass('menu-hidden')).toBe(false);
 
                 $('.menu-icon-link').click();
-                expect(jQuery('body').hasClass('menu-hidden')).toBe(true);
+                expect($('body').hasClass('menu-hidden')).toBe(true);
           });
 
     });
@@ -91,26 +91,45 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         beforeEach(function(done){
-            //load at least one feed
-            loadFeed(0, function() {
-                done();
-            });
+        //load at least one feed
+        loadFeed(0, function() {
+            done();
         });
+    });
 
          it('loadFeed is defined', function() {
             expect(loadFeed).toBeDefined();
          });
 
          it('single .entry element exists', function(done) {
-            expect(jQuery('.feed .entry').length).toBeGreaterThan(0);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
             done();
          });
     });
+
     /* TODO: Write a new test suite named "New Feed Selection" */
     describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        var feedA;
+        var feedB;
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                //the callback to load first feed is an anonymous function to load next feed
+                feedA = $('.feed').html();
+                loadFeed(1, function() {
+                    feedB = $('.feed').html();
+                    done();// Now both feeds are loaded we are done
+                });
+            });
+         });
+
+        it('feed content changes', function(done) {
+            expect(feedA === feedB).toBe(false);
+            done();
+        });
     });
+
 }());
