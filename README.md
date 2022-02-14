@@ -1,7 +1,7 @@
 #Run Project
 
 *To Run project download repo then open index.html
-*Or visit https://stonybrookweb.github.io/frontend-nanodegree-feedreader/index.html
+*Or visit https://alana29s.github.io/frontend-nanodegree-feedreader/index.html
 
 # Project Overview
 
